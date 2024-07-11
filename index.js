@@ -1,6 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 var cors = require("cors");
+const cookieParser = require("cookie-parser");
+
 const database = require("./config/database");
 require("dotenv").config();
 
@@ -13,7 +15,9 @@ app.use(cors());
 
 database.connect();
 
-// parse application/json
+app.use(cookieParser()); //@@ ko dùng flash nên ko cần điền key bừa nữa
+
+//@ parse application/json
 app.use(bodyParser.json());
 
 //@ Routes Version 1
