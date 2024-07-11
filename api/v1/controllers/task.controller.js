@@ -57,3 +57,23 @@ module.exports.detail = async (req, res) => {
         res.json("Ko tìm thấy!");
     }
 };
+
+//@ [PATCH] /api/v1/tasks/change-status/:id
+module.exports.changStatus = async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        const status = req.body.status;
+
+        await Task.updateOne({ _id: id }, { status: status });
+        res.json({
+            code: 200, //@@ 200 có nghĩa là thành công, để cho ô FE biết thành công và làm gì đó
+            message: "Cập nhật trạng thái thành công!",
+        });
+    } catch (error) {
+        res.json({
+            code: 400, //@@ 400 có nghĩa là lỗi, để cho ô FE biết thành công và làm gì đó
+            message: "Không tồn tại!",
+        });
+    }
+};
