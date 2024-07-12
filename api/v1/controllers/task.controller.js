@@ -131,6 +131,7 @@ module.exports.changeMulti = async (req, res) => {
 //@ [POST] /api/v1/tasks/create
 module.exports.create = async (req, res) => {
     try {
+        req.body.createdBy = req.user.id; //! req.user.id là do bên requireAuth mình cs trả về và mình có nhúng toàn bộ task bên file route nên ở đây dùng được
         const task = new Task(req.body);
         const data = await task.save();
 
